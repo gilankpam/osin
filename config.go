@@ -57,6 +57,15 @@ type ServerConfig struct {
 	// Separator to support multiple URIs in Client.GetRedirectUri().
 	// If blank (the default), don't allow multiple URIs.
 	RedirectUriSeparator string
+
+	// OpenID connect config
+	// Issuer for ID token http://openid.net/specs/openid-connect-core-1_0.html#IDToken
+	Issuer string
+
+	// ID token expire time in second, default 1 hour
+	IDTokenExpiration int32
+
+	JWTKey []byte
 }
 
 // NewServerConfig returns a new ServerConfig with default configuration

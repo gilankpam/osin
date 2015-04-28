@@ -449,7 +449,15 @@ func (s *Server) FinishAccessRequest(w *Response, r *http.Request, ar *AccessReq
 			w.Storage.RemoveAccess(ret.AccessData.AccessToken)
 		}
 
+		IDToken, err := s.generateIDToken(ar)
+		if err != nil {
+			w.SetError(E_SERVER_ERROR, "")
+			w.InternalError = err
+			return
+		}
+
 		// output data
+		w.Output["id_token"] = IDToken
 		w.Output["access_token"] = ret.AccessToken
 		w.Output["token_type"] = s.Config.TokenType
 		w.Output["expires_in"] = ret.ExpiresIn

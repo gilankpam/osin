@@ -8,8 +8,10 @@ import (
 type Server struct {
 	Config            *ServerConfig
 	Storage           Storage
+	UserStorage       UserStorage
 	AuthorizeTokenGen AuthorizeTokenGen
 	AccessTokenGen    AccessTokenGen
+	ClaimManager      ClaimManager
 	Now               func() time.Time
 }
 
